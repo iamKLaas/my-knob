@@ -100,27 +100,3 @@ Rules the code demonstrates: LVGL objects are touched only on the LVGL task (cal
 or inside `ui_lock()`; the network runs on its own task and reports back through a callback and
 atomics; nothing is ever buffered whole — the upload pulls bytes from a `read_cb` through one
 shared chunk; every pin is a `BOARD_*` macro.
-
-## Exercise ladder (from the workshop template)
-
-These exercises come with the template; I have not done most of them. The code here has since
-changed: the knob now also steers the surfer, and the verify script only checks the knob counter,
-not the sea scene.
-
-1. **Hello screen** — change the title label; rebuild, flash `app`, see it.
-2. **Knob counter** — make the counter wrap at 0..99 (`on_knob_step` in `app.c`).
-3. **Touch target** — add a second tap zone (an `lv_obj` with its own event callback).
-4. **Colour = state** — add `APP_PAUSED` mapped to `THEME_STATE_PAUSED`; the ring goes amber.
-5. **Haptic cue** — a different `haptic_play()` effect per state change.
-6. **Host test** — move the wrap logic from rung 2 into a pure `.c` and test it in `test/host`.
-7. **Wi-Fi + RSSI** — already on screen; show "weak" below −75 dBm.
-8. **GET JSON** — `net_http_get()` a value (e.g. a time API) from a network task; render it.
-9. **Stream 2 MiB** — hold the screen; watch the arc and `heap[before put]` / `heap[after put]`.
-10. **Survive a drop** — pull the AP mid-upload; add `X-Offset` resume using the receiver's GET.
-11. **Be called** (stretch) — `curl --data '{"value":42}' http://<knob-ip>/data`; keep the body in
-    the sink (`app_serve.c`), parse and show the number on the LVGL tick.
-
-After each rung, extend `scripts/verify-screens.sh` with the state you added and run it.
-
-Hints: never call `net_*` from an LVGL callback (rung 8 needs `xTaskCreate`); if the panel is
-dark the backlight did not init; if colours are wrong you inverted twice.
