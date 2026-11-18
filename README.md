@@ -1,5 +1,7 @@
 # my-knob: a surfer game on an ESP32-S3 round knob display
 
+https://github.com/user-attachments/assets/dedb56c4-379c-4df8-85c3-59c326cf4807
+
 A small hobby firmware project in C on ESP-IDF. A surfer rides waves on a round 360×360 display.
 The rotary knob moves the surfer between five wave lanes to dodge obstacles (buoys, logs, shark fins).
 It started from the knob-starter template of the
